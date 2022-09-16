@@ -1,2 +1,10 @@
+.bsp
+.idea
+project
+simWorkspace
+target
+tmp
+*.v
 *.class
-*.log
+!out/*
+
