@@ -18,15 +18,11 @@ package mylib
 
 import spinal.core._
 import spinal.lib._
-import spinal.lib.bus.amba4.axi._
-import spinal.lib.bus.amba3.apb._
+import spinal.core.sim._
 
 //Hardware definition
-class Regif_1 () extends Component {
-    val apb = slave(Apb3(Apb3Config(8,32,2) ))
-    val slv = Apb3SlaveFactory(apb,1)  
-    val regs = Vec(Reg(UInt(32 bits)) init 0, 8)
-
-    (0 until 8).map(i=>slv.readAndWrite(regs(i),address= i * 4) )
+class StreamFork_2 extends Component {
+    val inputStream = Stream(Bits(8 bits))
+    val outputStreams = StreamFork(inputStream,portCount=2, synchronous=true)
 }
 

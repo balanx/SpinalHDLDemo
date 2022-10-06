@@ -7,4 +7,5 @@ tmp
 *.v
 *.class
 !out/*
-
+regbank.*
+intrreg.*

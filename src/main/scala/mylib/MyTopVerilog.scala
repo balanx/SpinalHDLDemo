@@ -46,7 +46,6 @@ object MyTopVerilog {
     SpinalVerilog(new SlowArea_1)
     SpinalVerilog(new Axi_1)
     SpinalVerilog(new Axi_2_bridge(32, 32, 4) )
-    SpinalVerilog(new Regif_1)
     SpinalVerilog(new Apb_1)
     SpinalVerilog(new Apb3Router (
         Apb3Config(16,32,3)
@@ -84,8 +83,26 @@ object MyTopVerilog {
     SpinalVerilog(new StreamFifo_4_setDefName)
     SpinalVerilog(new StreamWidthAdapter_1)
     SpinalVerilog(new StreamWidthAdapter_2)
-//
     SpinalVerilog(new Mem_1)
+
+    SpinalVerilog(new StreamArbiter_1)
+    SpinalVerilog(new StreamArbiter_2)
+
+    SpinalVerilog(new StreamJoin_1)
+    SpinalVerilog(new StreamFork_1)
+    SpinalVerilog(new StreamFork_2)
+    SpinalVerilog(new StreamDispatcherSequencial_1)
+    SpinalVerilog(new StreamCCByToggle_1)
+    SpinalVerilog(new SlaveFactory_1)
+    SpinalVerilog(new SlaveFactory_2)
+    SpinalVerilog(new Regif_1)
+    SpinalVerilog(new Interrupt_1)
+    SpinalVerilog(new Interrupt_2)
+    SpinalVerilog(new Inout_1)
+    SpinalVerilog(new CrossbarFactory_1)
+    SpinalVerilog(new Bundle_1)
+    SpinalVerilog(new WeightRR_1)
+//
   }
 }
 
