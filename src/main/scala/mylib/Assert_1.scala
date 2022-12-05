@@ -20,16 +20,21 @@ import spinal.core._
 import spinal.lib._
 
 //Hardware definition
-class Stream_1 extends Component {
-  val io = new Bundle {
-    val din  = slave  Stream(UInt(8 bits))
-    val dout = master Stream(UInt(8 bits))
-  }
+case class Assert_1() extends Component {
 
-  //io.dout << io.din
-  io.dout </< io.din
-  //io.dout << io.din.s2mPipe()
-  //io.dout << io.din.m2sPipe()
-  //io.dout <-< io.din
+    val a, b, c = UInt(8 bits)
+    a := U"xf0"
+    b := U"x0f"
+
+    c := a + b
+    assert(c === U"8'xff")
+
+    val d = a +^ b
+    assert(d === U"9'x0ff")
+
+    val e = a +| U"8'x20"
+    assert(e === U"8'xff")
+
 }
+
 

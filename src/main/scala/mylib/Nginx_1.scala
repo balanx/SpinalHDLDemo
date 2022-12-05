@@ -20,16 +20,22 @@ import spinal.core._
 import spinal.lib._
 
 //Hardware definition
-class Stream_1 extends Component {
-  val io = new Bundle {
-    val din  = slave  Stream(UInt(8 bits))
-    val dout = master Stream(UInt(8 bits))
-  }
+object Nginx_1  extends App {
+  //var effectiveWeight = Array(4, 2, 1)
+  //var effectiveWeight = Array(1, 1, 1)
+  var effectiveWeight = Array(5, 1, 1, 1, 1)
+  var totalWeight = effectiveWeight.reduce(_+_)
+  var currentWeight = effectiveWeight
+  var max = 0
 
-  //io.dout << io.din
-  io.dout </< io.din
-  //io.dout << io.din.s2mPipe()
-  //io.dout << io.din.m2sPipe()
-  //io.dout <-< io.din
+  println(s"effective=${effectiveWeight.toList}, total=$totalWeight\n")
+
+  //for(i <- 1 until (1 << effectiveWeight.length)) {
+  for(i <- 0 until 9) {
+    currentWeight = currentWeight zip effectiveWeight map (t=>t._1 + t._2)
+    max = currentWeight.indexOf(currentWeight.max)
+    currentWeight(max) -= totalWeight
+    println(s"current=${currentWeight.toList}, max=$max")
+  }
 }
 

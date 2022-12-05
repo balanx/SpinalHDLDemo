@@ -20,16 +20,22 @@ import spinal.core._
 import spinal.lib._
 
 //Hardware definition
-class Stream_1 extends Component {
+class Clock_8 () extends Component {
   val io = new Bundle {
-    val din  = slave  Stream(UInt(8 bits))
-    val dout = master Stream(UInt(8 bits))
+    val din  = in  Bool()
+    val dout = out Bool()
   }
+  val clkA = ClockDomain.external("a")
+  val clkB = ClockDomain.external("b")
 
-  //io.dout << io.din
-  io.dout </< io.din
-  //io.dout << io.din.s2mPipe()
-  //io.dout << io.din.m2sPipe()
-  //io.dout <-< io.din
+  val areaA = new ClockingArea(clkA) {
+      val bufA = RegNext(io.din) init(False)
+  }
+  
+  val areaB = new ClockingArea(clkB) {
+      val bufB = BufferCC(areaA.bufA, False)
+  }
+  
+  io.dout := areaB.bufB
 }
 

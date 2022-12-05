@@ -20,16 +20,15 @@ import spinal.core._
 import spinal.lib._
 
 //Hardware definition
-class Stream_1 extends Component {
-  val io = new Bundle {
-    val din  = slave  Stream(UInt(8 bits))
-    val dout = master Stream(UInt(8 bits))
-  }
+class Latch_1 () extends Component {
 
-  //io.dout << io.din
-  io.dout </< io.din
-  //io.dout << io.din.s2mPipe()
-  //io.dout << io.din.m2sPipe()
-  //io.dout <-< io.din
+  val a=in  UInt(2 bits)
+  val b=out UInt(8 bits)
+  b.noCombLoopCheck
+  when(a<1){
+    b:=3
+  }otherwise{
+    b:=b
+  }
 }
 

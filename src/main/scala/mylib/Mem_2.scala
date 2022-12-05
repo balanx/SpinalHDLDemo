@@ -19,17 +19,32 @@ package mylib
 import spinal.core._
 import spinal.lib._
 
-//Hardware definition
-class Stream_1 extends Component {
-  val io = new Bundle {
-    val din  = slave  Stream(UInt(8 bits))
-    val dout = master Stream(UInt(8 bits))
-  }
 
-  //io.dout << io.din
-  io.dout </< io.din
-  //io.dout << io.din.s2mPipe()
-  //io.dout << io.din.m2sPipe()
-  //io.dout <-< io.din
+case class Mem_2() extends Component{
+
+    val io = new Bundle {
+        val writeAddress = in  UInt(8  bits)
+        val writeData    = in  Bits(32 bits)
+        val writeValid   = in  Bool()
+
+        val readAddress  = in  UInt(8  bits)
+        val readValid    = in  Bool()
+        val readData     = out Bits(32 bits)
+    }
+
+    val mem = Mem(Bits(32 bits), wordCount = 256)
+    mem.generateAsBlackBox()
+
+    mem.write(
+      enable  = io.writeValid,
+      address = io.writeAddress,
+      data    = io.writeData
+    )
+
+    io.readData := mem.readSync(
+      enable  = io.readValid,
+      address = io.readAddress
+    )
+
 }
 

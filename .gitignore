@@ -7,5 +7,6 @@ tmp
 *.v
 *.class
 !out/*
+!src/main/scala/mylib/*.v
 regbank.*
 intrreg.*

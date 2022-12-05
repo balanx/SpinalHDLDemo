@@ -27,7 +27,7 @@ import spinal.lib.bus.bram._
 //Generate the MyTopLevel's Verilog
 object MyTopVerilog {
   def main(args: Array[String]) {
-//
+
     SpinalVerilog(new assignTest_1)
     SpinalVerilog(new Stream_1)
     SpinalVerilog(new Stream_2)
@@ -102,7 +102,12 @@ object MyTopVerilog {
     SpinalVerilog(new CrossbarFactory_1)
     SpinalVerilog(new Bundle_1)
     SpinalVerilog(new WeightRR_1)
-//
+    SpinalVerilog(new Assert_1)
+
+    SpinalVerilog(new BlackBoxTest_1)
+    SpinalVerilog(new Clock_8)
+    SpinalVerilog(new Latch_1)
+    SpinalVerilog(new Mem_2)
   }
 }
 
